@@ -4,31 +4,15 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 const long long INF = 1LL << 60;
+const int inf = (1 << 30);
 const ll mod = 998244353;
-
-// 素因数分解した値をvectorで返す関数
-vector<pair<ll,ll>>prime_factorize(ll N){
-    // N を素因数分解する
-    vector<pair<ll,ll>>res;
-    for(ll a=2; a*a <= N;a++){
-        if(N % a != 0) continue;
-        ll ex = 0;// aの指数
-        // 割れる限り割り続ける
-        while(N % a==0){
-            ++ex;
-            N /= a;
-        }
-        res.push_back({a,ex});
-    }
-    // 最後に残った数について
-    if(N != 1) res.push_back({N,1});// 1は素数でないので
-    return res;
-}
-
+const ll MOD = 1000000007;
+const ld PI = acos(-1.0L);
+template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return true; } return false; }
+template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true; } return false; }
 // combination の高速計算
 // 詳細は https://drken1215.hatenablog.com/entry/2018/06/08/210000
 const int MAX = 11000000;// ここのサイズがあまりにも小さいと計算途中で溢れてしまう
-const ll MOD = 1000000007;
 // この MAXの値は、 nCkの n に相当する。
 long long fac[MAX], finv[MAX], inv[MAX];
 
@@ -50,23 +34,11 @@ long long COM(int n, int k){
     if (n < 0 || k < 0) return 0;
     return fac[n] * (finv[k] * finv[n - k] % MOD) % MOD;
 }
-
-
-int main() {
+int main(){
+    ll n, k;
+    cin >> n >> k;
     // 前処理
     COMinit();
-
-    // 計算例
-    cout << COM(100000, 50000) << endl;
-}
-
-
-
-// 繰り返し自乗法
-long long modpow(long long a, long long n, long long m) {
-    if (n == 0) return 1;
-    long long half = modpow(a, n/2, m);
-    long long res = half * half % m;
-    if (n & 1) res = res * a % m;
-    return res;
+    //
+    cout << COM(n+k-1,k) << endl;
 }
