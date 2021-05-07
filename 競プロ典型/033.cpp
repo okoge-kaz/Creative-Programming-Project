@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+#define _GLIBCXX_DEBUG
+using namespace std;
+typedef long long ll;
+typedef long double ld;
+const long long INF = 1LL << 60;
+const int inf = (1 << 30);
+const ll mod = 998244353;
+const ll MOD = 1000000007;
+const ld PI = acos(-1.0L);
+template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return true; } return false; }
+template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true; } return false; }
+int main(){
+    int H,W;
+    cin >> H >> W;
+    if( H < 2 || W < 2){
+        cout << H*W << endl;
+        return 0;
+    }
+    int w,h;
+    H % 2 == 1 ? h = H/2 + 1 : h = H / 2;
+    W % 2 == 1 ? w = W/2 + 1 : w = W / 2;
+    cout << h*w << endl;
+}
