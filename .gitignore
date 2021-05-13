@@ -6,3 +6,5 @@ a.out
 On-Contest/ARC/118/a.out.dSYM/Contents/Info.plist
 AOJ/DSL/a.out.dSYM/Contents/Info.plist
 AOJ/DSL/UnionFind/a.out.dSYM/Contents/Info.plist
+.gitignore
+AOJ/DSL/尺取り法/a.out.dSYM/Contents/Info.plist
