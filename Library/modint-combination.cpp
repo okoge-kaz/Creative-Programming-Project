@@ -27,6 +27,17 @@ mint combination(ll n, ll k){
     return ans;
 }
 
+ll comb(ll n, ll k){
+    // combinationをするときは、kの方の値が小さくなることが確約されている方を使うように
+    ll ans = 1;
+    for(ll i=0;i<k;i++){
+        ans *= (n-i);
+        ans /= (i+1);
+    }
+    return ans;
+}
+
+
 int main(){
     ll n,k;
     mint ans = combination(n,k);
