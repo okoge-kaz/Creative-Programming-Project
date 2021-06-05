@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
-#include <atcoder/all>
 #define _GLIBCXX_DEBUG
 using namespace std;
-using namespace atcoder;
 typedef long long ll;
 typedef long double ld;
 const long long INF = 1LL << 60;
@@ -16,13 +14,34 @@ template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return true
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true; } return false; }
 int main(){
     int N; cin >> N;
-    vector<ll>A(N), B(N); for(ll &a:A) cin >> a; for(ll &b :B) cin >> b;
-    ll sum_A=0; ll sum_B=0;
-    for(ll &a:A) sum_A+=a; for(ll &b:B) sum_B+=b;
-    if(sum_A!=sum_B){
+    vector<int>A(N); for(int &a:A) cin >> a;
+    int sum = 0;
+    for(int i=0;i<N;i++) sum += A[i];
+    if(sum % N != 0){
         cout << -1 << endl;
         return 0;
     }
-    // 本文のように操作が複雑な時にはまずテストケースで実験してみるのがとても効果的
-    
+
+    vector<int>B(N);// Bが保存する情報は均等にした際の人数と現在の人数の差（何人余るか）
+    for(int i=0;i<N;i++){
+        B[i] = A[i] - sum/N;
+    }
+
+    int ans = 0;
+    int tmp = 0;
+    int last = 0;
+    for(int i=0;i<N;i++){
+        tmp += B[i];
+        if(tmp == 0){
+            tmp = 0;
+            ans += (i-last);
+            last = i+1;
+        }
+    }
+    if(tmp!=0){
+        cout << -1 << endl;
+        return 0;
+    }
+
+    cout << ans << endl;
 }

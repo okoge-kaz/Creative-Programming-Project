@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
-#include <atcoder/all>
 #define _GLIBCXX_DEBUG
 using namespace std;
-using namespace atcoder;
 typedef long long ll;
 typedef long double ld;
 const long long INF = 1LL << 60;
@@ -14,15 +12,17 @@ int dy[] = {1, 0, -1, 0}, dx[] = {0, -1, 0, 1};
 int dy8[] = {1, 1, 0, -1, -1, -1, 0, 1}, dx8[] = {0, -1, -1, -1, 0, 1, 1, 1};
 template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return true; } return false; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true; } return false; }
+int N; vector<int>a;
 int main(){
-    int N; cin >> N;
-    vector<ll>A(N), B(N); for(ll &a:A) cin >> a; for(ll &b :B) cin >> b;
-    ll sum_A=0; ll sum_B=0;
-    for(ll &a:A) sum_A+=a; for(ll &b:B) sum_B+=b;
-    if(sum_A!=sum_B){
-        cout << -1 << endl;
-        return 0;
+    cin >> N;
+    a.resize(N); for(int i=0;i<N;i++) cin >> a[i];
+
+    ll cnt = 0;
+    int r=0;
+    for(int l=0;l<N;l++){
+        while(r+1<N && a[r] < a[r+1]) r++;
+        cnt += (r-l+1);
+        if(l==r) r++;
     }
-    // 本文のように操作が複雑な時にはまずテストケースで実験してみるのがとても効果的
-    
+    cout << cnt << endl;
 }
