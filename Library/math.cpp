@@ -70,3 +70,22 @@ long long modpow(long long a, long long n, long long m) {
     if (n & 1) res = res * a % m;
     return res;
 }
+
+string From_k_To_l (string num, int k,int l){
+    // k進数をl進数に変換する関数
+    // ただし 1 <= k <= 10 && 1 <= l << 10 
+    ll tmp = 0;
+    int cnt = 0;
+    for(int i=(int)num.size()-1;i>=0;i--){
+        tmp +=  (num[i]-'0') * (ll)pow(k,cnt);
+        cnt++;
+    }
+    // 10進数になった。
+    if(tmp == 0) return "0";
+    string res;
+    while(tmp){
+        res = to_string(tmp%l) + res;
+        tmp /= l;
+    }
+    return res;
+}
