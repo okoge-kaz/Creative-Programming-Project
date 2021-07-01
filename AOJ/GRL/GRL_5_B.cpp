@@ -14,6 +14,7 @@ template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return true
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true; } return false; }
 // 木において（有向辺）各点からの最長距離（木の高さ）を求める 
 // 計算量 4 * N (log N) (定数倍がかなり重い)
+// 参考 https://hiroyuki.sano.ninja/notes/4d8091cd-87fb-44f5-9f4c-830b76357684
 // verified https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_B
 
 struct edge {
