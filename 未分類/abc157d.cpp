@@ -45,3 +45,44 @@ class UnionFind {
             return depth[root(x)];
         }
 };
+
+int main(){
+    int N,M,K; cin >> N >> M >> K;
+    vector<int>A(M),B(M);
+    for(int i=0;i<M;i++){
+        cin >> A[i] >> B[i];
+        A[i]--,B[i]--; 
+    }
+    vector<int>C(K),D(K);
+    for(int i=0;i<K;i++){
+        cin >> C[i] >> D[i];
+        C[i]--,D[i]--;
+    }
+    // Union-Findをそのまま使うのではない難
+    UnionFind<int> uf(N);
+    for(int i=0;i<M;i++){
+        uf.unite(A[i],B[i]);
+        // 0-index
+    }
+    vector<int>ans(N);
+    for(int i=0;i<N;i++){
+        ans[i] = uf.size(i)-1;
+        // 自分自身を除く
+    }
+    set<int>st[110000];
+    for(int i=0;i<M;i++){
+        ans[A[i]]--; ans[B[i]]--;
+        // 直接の友人関係の箇所を引く
+        st[A[i]].insert(B[i]);
+        st[B[i]].insert(A[i]);
+    }
+    for(int i=0;i<K;i++){
+        if(st[C[i]].count(D[i])==0 && uf.issame(C[i],D[i])){
+            ans[C[i]]--; ans[D[i]]--;
+            // 直接の友達でもなく（これはすでに除いている）間接的な友人関係になっているもの
+        }
+    }
+    
+    for(int i=0;i<N;i++) cout << ans[i] << " ";
+    cout << endl;
+}
