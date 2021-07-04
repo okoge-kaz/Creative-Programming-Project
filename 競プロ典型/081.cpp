@@ -12,7 +12,6 @@ int dy[] = {1, 0, -1, 0}, dx[] = {0, -1, 0, 1};
 int dy8[] = {1, 1, 0, -1, -1, -1, 0, 1}, dx8[] = {0, -1, -1, -1, 0, 1, 1, 1};
 template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return true; } return false; }
 template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return true; } return false; }
-
 // verified https://atcoder.jp/contests/typical90/tasks/typical90_cc
 class CumulativeSum2D {
     private:
@@ -42,3 +41,20 @@ class CumulativeSum2D {
             return(data[gy][gx] - data[gy][sx] - data[sy][gx] + data[sy][sx]);
         }
 };
+int main(){
+    int N,K; cin >> N >> K;
+    CumulativeSum2D data(5100,5100);
+    for(int i=0;i<N;i++){
+        int a,b; cin >> a >> b;
+        data.add(a,b);
+    }
+    data.build();
+    ll ans = 0;
+    for(int i=0;i+K<=5010;i++){
+        for(int j=0;j+K<=5010;j++){
+            chmax(ans,data.query(i,j,i+K+1,j+K+1));
+            // 差がK以下なので1-indexであることからK+1にするべし
+        }
+    }
+    cout << ans << endl;
+}
